@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
+		<link rel="stylesheet" type="text/css" href="styles.css">
 		<meta charset="utf-8">
 	<title>Book Writer</title>
 	</head>
 	<body>
-		<p id="linesWritten">0 lines written</p>
-		<button onclick="writeLine()">Write a line</button>
-		<button onclick="makeParagraph()">Make a paragraph (5 lines)</button>
-		<p id="paragraphNumber">0 paragraphs written</p>
-		<button onclick="sellArticle()">Sell article (10 paragraphs)</button>
-		<p id="money"> You have $0</p>
-		<p id="writers"> You have no writers. Buy one for $10</p>
-		<button onclick="buyWriter()">Buy a fiverr writer to do your work for you</button>
-                <script src="main.js" charset="utf-8" type="text/javascript"></script>	
+		<div class="split left">
+  			<div class="centered">
+				<div>
+					<p id="linesWritten">0 lines written</p>
+					<button onclick="writeLine()">Write a line</button>
+				</div>
+				<div>
+                                	<p id="paragraphNumber">0 paragraphs written</p>
+					<button onclick="makeParagraph()">Make a paragraph (5 lines)</button>
+					<button onclick="buyAllParagraphs()">Buy all paragraphs you can</button>
+				</div>
+				<div>
+					<p id="money"> You have $0</p>
+				        <button onclick="sellArticle()">Sell article (10 paragraphs)</button>
+				<div>
+					<p id="writers"> You have no writers. Buy one for $10</p>
+					<button onclick="buyWriter()">Buy a fiverr writer to do your work for you</button>
+				</div>
+			</div>
+		</div>
+		<div class="split right">
+			<div class="centered">
+				<div>
+					<p id="newSiteDescription">Buy access to a new marketplace, so that you can sell the same content to different people. Double the range of how much you'll get paid.$50 </p>
+					<br>
+					<button onclick="newSite()">Buy access</button>
+			</div>
+		</div>
+		 <script src="main.js" charset="utf-8" type="text/javascript"></script>	
 	</body>
 </html>
