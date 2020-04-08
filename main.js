@@ -9,8 +9,10 @@ var gameData = {
 	articleValue: 10,
 	money: 100,
 	paragraphSellMultiplier: 1,
+	lineWriterMultiplier: 1,
 	lineWriter: 0,
 	lineWriterPrice: 10,
+	writerCost: 100,
 	siteCost: 50
 }
 
@@ -45,6 +47,12 @@ function sellArticle() {
 	}
 }
 
+function sellAllArticles() {
+	while (gameData.paragraphs >= gameData.articleSize) {
+		sellArticle()
+	}
+}
+
 function buyAllParagraphs() {
         while (gameData.lines >= gameData.paragraphSize) {
                 gameData.lines -= gameData.paragraphSize
@@ -66,7 +74,7 @@ function buyWriter() {
 
 function tickLine() {
 	gameData.lines += gameData.linesPerTick
-	gameData.lines += gameData.lineWriter
+	gameData.lines += gameData.lineWriter * gameData.lineWriterMultiplier
         document.getElementById("linesWritten").innerHTML = prettify(gameData.lines) + " lines written"
 	document.getElementById("paragraphNumber").innerHTML = prettify(gameData.paragraphs) + " paragraphs written"
 	document.getElementById("money").innerHTML = "You have $" + prettify(gameData.money)
@@ -78,6 +86,15 @@ function newSite() {
 		gameData.paragraphSellMultiplier *= 2
 		gameData.siteCost *= 15
 		document.getElementById("newSiteDescription").innerHTML = "You can buy access to another site for $" + prettify(gameData.siteCost)
+	}
+}
+
+function upgradeWriters() {
+	if (gameData.money >= gameData.writerCost) {
+		gameData.money -= gameData.writerCost
+		gameData.lineWriterMultiplier *= 2
+		gameData.writerCost *= 10
+		document.getElementById("writerUpgradeDescription").innerHTML = "Upgrade the software that lets you spy on your writers, allowing you to do so even more effectively. $" + prettify(gameData.writerCost)
 	}
 }
 
