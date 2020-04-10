@@ -8,7 +8,7 @@ var gameData = {
 
 var churchData = {
 	bricks: 50,
-	HP: 49,
+	HP: 0,
 	state: "decrepit"
 }
 
