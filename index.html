@@ -3,43 +3,41 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<meta charset="utf-8">
-	<title>Book Writer</title>
+	<title>church</title>
 	</head>
-	<body>
-		<div class="split left">
-  			<div class="centered">
-				<div>
-					<p id="linesWritten">0 lines written</p>
-					<button onclick="writeLine()">Write a line</button>
-				</div>
-				<div>
-                                	<p id="paragraphNumber">0 paragraphs written</p>
-					<button onclick="makeParagraph()">Make a paragraph (5 lines)</button>
-					<button onclick="buyAllParagraphs()">Buy all paragraphs you can</button>
-				</div>
-				<div>
-					<p id="money"> You have $0</p>
-				        <button onclick="sellArticle()">Sell article (10 paragraphs)</button>
-					<button onclick="sellAllArticles()">Sell all articles</button>
-				<div>
-					<p id="writers"> You have no writers. Buy one for $10</p>
-					<button onclick="buyWriter()">Buy a fiverr writer to do your work for you</button>
-				</div>
-			</div>
+	<script src="main.js" charset="utf-8" type="text/javascript"></script>
+	<body onload="hideItems()">
+		<div id="stage1">
+			Just imagine that prior to seeing this screen you've seen an extremely impressive title screen and a spiel about how you're a priest being sent out to an old abandoned church as part of outreach to the heathens. I'll put it in eventually.
+			<p id="churchStatus">The church is: partially demolished</p>
+			<p id="totalBricks">You have 50 bricks</p>
+                	<button onclick="repairChurch()">Repair a part of the church</button>
+		<button onclick="openChurch()" id="openChurchButton">Open the church</button>
+		</div>	
+		<div id="stage1.5">
+			this is where i will put the text for when you open the church. for now it is a placeholder
+			<button onclick="startStage2()">Start work as a priest of Ygghras</button>
 		</div>
-		<div class="split right">
-			<div class="centered">
-				<div>
-					<p id="newSiteDescription">Buy access to a new marketplace, so that you can sell the same content to different people. Double the range of how much you'll get paid.$50 </p>
-					<br>
-					<button onclick="newSite()">Buy access</button>
-				</div>
-				<div>
-					<p id="writerUpgradeDescription">Install a screen capture program on your writers computers to make sure they're actually writing. Doubles the lines written per second. $100 </p>
-					<button onClick="upgradeWriters()">Install spyware</button>
-				</div>
-			</div>
+		<div class="split left" id="stage2">
+			<p id="openChurchState">You have 0 parishioners, tithing 0 gold a day</p>
+			Parishioners will tithe 10% of their income, which, given that this is a new, tiny parish, is not very much. You can increase the amount you receive by getting more parishioners, or by helping them earn more and getting a bigger cut of their 10%. 
+			<p id="totalGold">You have 10 gold</p>
+			<hr class="solid">
+			<p id="wood">You have 0 wood</p>
+			<button onClick="getwood()">Find  wood</button>
+			<p id="stone">You have 0 stone</p>
+			<button onClick="getstone()">Find stone</button>
 		</div>
-		 <script src="main.js" charset="utf-8" type="text/javascript"></script>	
+		<div class="split right" id="stage2right">
+			<p id="houses">You have 0 houses. A new house would cost 10 wood</p>
+			<button onClick="makeHouse()">Build a new house</button>
+			<p id="villagers">You have 0 villagers</p>
+			<p id="homes">You have room for 0 villagers</p>
+			<hr class="solid">
+			<p id="lumberYards">You have 0 lumberyards, producing 0 wood a second. A new lumberyard would cost 15 gold and 20 wood</p>
+			<button onclick="buyLumberYard()">Buy lumberyard</button>
+
+
+		</div>
 	</body>
 </html>
