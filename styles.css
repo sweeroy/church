@@ -6,10 +6,30 @@
 .mainScreen {
   display: flex;
   flex-direction: row;
+  
+}
+
+.mainScreen div {
+  border: 2px solid grey;
+}
+
+.upgradeScreenClass {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 5px;
+  border: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.upgradeScreenItems {
+  border: 2px solid grey;
+  text-align: center;
 }
 
 footer {
   margin: auto auto 0 auto;
   width: 100%;
   align-content: center;
+  justify-content: center;
 }
