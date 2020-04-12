@@ -26,7 +26,7 @@
 					<p id="totalGold">You have 10 gold</p>
 					<hr class="solid">
 					<p id="wood">You have 0 wood</p>
-					<button onClick="getwood()">Find  wood</button>
+					<button onClick="getwood()">Find wood</button>
 					<p id="stone">You have 0 stone</p>
 					<button onClick="getstone()">Find stone</button>
 				</div>
@@ -38,16 +38,36 @@
 					<hr class="solid">
 					<p id="lumberYards">You have 0 lumberyards, producing 0 wood a second. A new lumberyard would cost 15 gold and 20 wood</p>
 					<button onclick="buyLumberYard()">Buy lumberyard</button>
+					<p id="mines">You have 0 mines, producing 0 stone a second. A new mine would cost </p>
+					<button onClick="buyMine()">Buy mine</button>
 				</div>
 			</div>
-			<div id="upgradeScreen">
-				this is a test screen
+			<div id="upgradeScreen" class="upgradeScreenClass">
+				<div id="churchUpgrades" class="upgradeScreenItems">
+					<p id="churchFirstUpgradeText">Test church upgrade</p>
+					<button onClick="upgradeChurch()">Church upgrade</button>
+				</div>
+				<div id="mineUpgrades" class="upgradeScreenItems" >
+					<p id="mineUpgradeText">Mine upgrade text</p>
+					<button onClick="upgradeMine()">Mine upgrade</button>
+				</div>
+				<div id="lumberYardUpgrades" class="upgradeScreenItems">
+					<p id="lumberYardFirstUpgradeText">This is a test</p>
+					<button onClick="upgradeLumberYard()">Lumberyard Upgrade</button>
+				</div>
+			</div>
+			<div id="journalScreen" class="journalScreenClass">
+				<p id="journalPosition0">When I make the journal, this is where it will go</p>
+				<p id="journalPosition1"></p>
+				<p id="journalPosition2"></p>
 			</div>
 		</body>
+
 		<footer id="navigateButtons">
 			<hr class="solid">
 			<button onclick="tab('mainScreen')">Go to Mine Gold</button>
 			<button onclick="tab('upgradeScreen')">Go to Shop</button>
+			<button onclick="tab('journalScreen')">Go to Journal</button>
 		</footer>
 	</div>
 </html>

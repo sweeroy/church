@@ -1,6 +1,6 @@
 // this holds the main data for the variables used by the game, and sets them to their default values
 var gameData = {
-	gold: 0,
+	gold: 15,
 	gameStage: 1,
 	tithePercent: 0.1,
 	displayTithePercent: 10
@@ -13,13 +13,8 @@ var churchData = {
 }
 
 var villageData = {
-	wood: 0,
+	wood: 20,
 	woodGetMultiplier: 1,
-	lumberyards: 0,
-	lumberyardWoodCost: 20,
-	lumberyardGoldCost: 15,
-	lumberyardProduction: 1,
-	lumberyardRuns: 0,
 	houses: 0,
 	houseCost: 10,
 	houseSize: 1,
@@ -28,6 +23,22 @@ var villageData = {
 	stone: 0,
 	stoneGetMultiplier: 1,
 	tithe: 0
+}
+
+var lumberYardData = {
+	lumberyards: 0,
+	lumberyardWoodCost: 20,
+	lumberyardGoldCost: 15,
+	lumberyardProduction: 1,
+	lumberyardRuns: 0
+}
+
+var mineData = {
+	mines: 0,
+	mineWoodCost: 20,
+	mineGoldCost: 15,
+	mineProduction: 1,
+	mineRuns: 0,
 }
 // this rounds numbers so that java doesn't make a bunch of pointlessly long decimal places
 function prettify(input){
@@ -41,6 +52,7 @@ function hideItems(){
 	document.getElementById("stage2right").style.display = "none"
 	document.getElementById("navigateButtons").style.display = "none"	
 	document.getElementById("upgradeScreen").style.display = "none"
+	document.getElementById("journalScreen").style.display = "none"
 	
 }
 // stage 1 of the game, repairing the church and giving the first bits of exposition
@@ -88,7 +100,7 @@ function openChurch() {
 
 function show(id) {
 	const elem = document.getElementById(id)
-	if (elem) elem.style.display = "block"
+	if (elem) elem.style.display = "flex"
 	else console.log("no elem found for id", id)
   }
   
@@ -100,6 +112,7 @@ function hide(id) {
 function tab(id) {
 	hide("mainScreen")
 	hide("upgradeScreen")
+	hide("journalScreen")
 	show(id)
   }
 function startStage2() {
@@ -131,11 +144,25 @@ function makeHouse() {
 }
 
 function buyLumberYard() {
-	if (villageData.wood >= villageData.lumberyardWoodCost && gameData.gold >= villageData.lumberyardGoldCost) {
-		villageData.wood -= villageData.lumberyardWoodCost
-		villageData.gold -= villageData.lumberyardGoldCost
-		villageData.lumberyards += 1
-		villageData.lumberyardRuns += villageData.lumberyards * villageData.lumberyardProduction
+	if (villageData.wood >= lumberYardData.lumberyardWoodCost && gameData.gold >= lumberYardData.lumberyardGoldCost) {
+		villageData.wood -= lumberYardData.lumberyardWoodCost
+		gameData.gold -= lumberYardData.lumberyardGoldCost
+		lumberYardData.lumberyards += 1
+		lumberYardData.lumberyardGoldCost *= 1.6
+		lumberYardData.lumberyardWoodCost *= 1.6
+		lumberYardData.lumberyardRuns = lumberYardData.lumberyards * lumberYardData.lumberyardProduction
+		updateUI()
+	}
+}
+
+function buyMine() {
+	if (villageData.wood >= mineData.mineWoodCost && gameData.gold >= mineData.mineGoldCost) {
+		villageData.wood -= mineData.mineWoodCost
+		gameData.gold -= mineData.mineGoldCost
+		mineData.mineGoldCost *= 1.8
+		mineData.mineWoodCost *= 1.8
+		mineData.mines += 1
+		mineData.mineRuns += mineData.mines * mineData.mineProduction
 		updateUI()
 	}
 }
@@ -158,7 +185,8 @@ function updateUI(){
 	document.getElementById("homes").innerHTML = `You have room for ${prettify(villageData.emptyHouses)} more villagers`
 	document.getElementById("totalGold").innerHTML = `You have ${prettify(gameData.gold)} gold`
 	document.getElementById("openChurchState").innerHTML = `You have ${villageData.villagers} parishioners tithing ${gameData.displayTithePercent}% of their income`
-	document.getElementById("lumberYards").innerHTML = `You have ${villageData.lumberyards} lumberyards, producing ${villageData.lumberyardRuns} wood a second. A new lumberyard would cost ${prettify(villageData.lumberyardGoldCost)} gold and ${prettify(villageData.lumberyardWoodCost)} wood`
+	document.getElementById("lumberYards").innerHTML = `You have ${lumberYardData.lumberyards} lumberyards, producing ${lumberYardData.lumberyardRuns} wood a second. A new lumberyard would cost ${prettify(lumberYardData.lumberyardGoldCost)} gold and ${prettify(lumberYardData.lumberyardWoodCost)} wood`
+	document.getElementById("mines").innerHTML = `You have ${mineData.mines} lumberyards, producing ${mineData.mineRuns} stone a second. A new mine would cost ${prettify(mineData.mineGoldCost)} gold and ${prettify(mineData.mineWoodCost)} wood`
 }
 	
 function getTithe(){
@@ -167,15 +195,21 @@ function getTithe(){
 }
 
 function lumberyardRun(){
-	villageData.wood += villageData.lumberyardRuns
+	villageData.wood += lumberYardData.lumberyardRuns
+}
+
+function mineRun(){
+	villageData.stone += mineData.mineRuns
 }
 
 // runs the core game loop. will execute whatever is contained within the curly braces once every second
 var mainGameLoop = window.setInterval(function() {
+	console.log(villageData.wood)
 	villagerCheck()
 	updateUI()
 	getTithe()
 	lumberyardRun()
+	mineRun()
 }, 1000)
 
 
