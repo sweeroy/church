@@ -8,7 +8,7 @@ var gameData = {
 
 var churchData = {
 	bricks: 50,
-	HP: 0,
+	HP: 49,
 	state: "decrepit"
 }
 
@@ -39,6 +39,9 @@ function hideItems(){
 	document.getElementById("stage1.5").style.display = "none"
 	document.getElementById("stage2").style.display = "none"
 	document.getElementById("stage2right").style.display = "none"
+	document.getElementById("navigateButtons").style.display = "none"	
+	document.getElementById("upgradeScreen").style.display = "none"
+	
 }
 // stage 1 of the game, repairing the church and giving the first bits of exposition
 function churchCheck() {
@@ -83,10 +86,27 @@ function openChurch() {
 	gameData.gameStage += 0.5
 }
 
+function show(id) {
+	const elem = document.getElementById(id)
+	if (elem) elem.style.display = "block"
+	else console.log("no elem found for id", id)
+  }
+  
+function hide(id) {
+	const elem = document.getElementById(id)
+	if (elem) elem.style.display = "none"
+  }
+  
+function tab(id) {
+	hide("mainScreen")
+	hide("upgradeScreen")
+	show(id)
+  }
 function startStage2() {
 	document.getElementById("stage1.5").style.display = "none"
 	document.getElementById("stage2").style.display = "block"
 	document.getElementById("stage2right").style.display = "block"
+	document.getElementById("navigateButtons").style.display ="block"
 	gameData.gameStage += 0.5
 }
 // stage 2 of the game. moves to having a small town build up around the church
